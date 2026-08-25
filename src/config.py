@@ -1,13 +1,9 @@
 """
-Project configuration — single source of truth.
+Project configuration.
 
 All paths, the global random seed, feature definitions, and outlier-rule
 specifications live here so that every pipeline stage (data preparation,
-modeling, evaluation, figures) reads identical settings. This is a core
-reproducibility requirement of the coursework (marking criterion 5.1).
-
-Project: Modeling Decadal Glacier Area Change in the Nepal Himalaya Using
-Optimized Gaussian Process Regression (MSc Advanced ML, Task 1).
+modeling, evaluation, figures) reads identical settings.
 """
 
 from pathlib import Path
@@ -16,7 +12,7 @@ from pathlib import Path
 # Reproducibility
 # ---------------------------------------------------------------------------
 # One global seed used for CV splitting, Random Forest, GP optimizer restarts,
-# and Bayesian optimization. Confirmed with the student (Decisions Log).
+# and Bayesian optimization.
 RANDOM_SEED = 42
 
 # Number of cross-validation folds shared by ALL models (GPR, RF, linear),
@@ -43,7 +39,7 @@ TABLES_DIR = OUTPUTS_DIR / "tables"
 LOGS_DIR = OUTPUTS_DIR / "logs"
 
 # ---------------------------------------------------------------------------
-# Ground-truth dataset facts (verified by the student's inspection runs).
+# Ground-truth dataset facts.
 # The Phase 0 sanity check asserts these; a mismatch halts the pipeline.
 # ---------------------------------------------------------------------------
 EXPECTED_RAW_SHAPE = (14659, 22)
@@ -94,7 +90,7 @@ LEAKAGE_BANNED = ["Thickness", "Reserve", "Area_SqKm", "area_2010",
                   "Shape_area", "Shape_len"]
 
 # ---------------------------------------------------------------------------
-# Outlier-handling rules (Decisions Log #4)
+# Outlier-handling rules
 # ---------------------------------------------------------------------------
 # Each rule maps a name -> dict of thresholds. `min_area_1980` is the minimum
 # initial (1980) area in km^2; `max_pct_change` caps positive change (values
@@ -107,7 +103,7 @@ OUTLIER_RULES = {
 }
 
 # ---------------------------------------------------------------------------
-# Evaluation-integrity tripwire (professor's guidance — see PROJECT_PLAN.md)
+# Evaluation-integrity tripwire
 # ---------------------------------------------------------------------------
 # If any model reaches held-out R^2 above this, the pipeline flags a loud
 # warning and the result must be audited for leakage before being reported.
